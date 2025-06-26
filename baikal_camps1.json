@@ -1,0 +1,890 @@
+[
+  {
+    "name": "Wintercamp",
+    "lat": 51.429841,
+    "lon": 103.6964067,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Золотые пески",
+    "lat": 53.6711911,
+    "lon": 103.3199504,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кунг",
+    "lat": 51.3933305,
+    "lon": 104.8432441,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Смородовка 1",
+    "lat": 51.8644618,
+    "lon": 104.9599519,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "урочище Кресты",
+    "lat": 53.7525125,
+    "lon": 109.032558,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Падь Малая Кадильная 3",
+    "lat": 51.9357681,
+    "lon": 105.2570496,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "мыс Большой Кадильный 1",
+    "lat": 51.9173296,
+    "lon": 105.2180952,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Чёрная Падь",
+    "lat": 51.8892101,
+    "lon": 105.0375745,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Малая Сенная Падь",
+    "lat": 51.899259,
+    "lon": 105.1130585,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "м. Большой Кадильный 2",
+    "lat": 51.9297592,
+    "lon": 105.2513756,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Смородовка 2",
+    "lat": 51.8649406,
+    "lon": 104.9607925,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Большая Сенная Падь",
+    "lat": 51.8989983,
+    "lon": 105.1243591,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Мыс Соболев",
+    "lat": 51.899231,
+    "lon": 105.1556702,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Солонцовая Падь",
+    "lat": 51.8806801,
+    "lon": 105.0176392,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Падь Средняя 2",
+    "lat": 51.8709297,
+    "lon": 104.9885635,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Падь Средняя 1",
+    "lat": 51.8703499,
+    "lon": 104.9838333,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Падь Емельяниха",
+    "lat": 51.8601191,
+    "lon": 104.9399833,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Бухта Сухая",
+    "lat": 52.3022245,
+    "lon": 105.7556525,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Вблизи м, Красный Яр",
+    "lat": 52.4231534,
+    "lon": 105.8824838,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Устье р. Курта",
+    "lat": 52.4955317,
+    "lon": 105.9688315,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Без воды 1640м",
+    "lat": 51.4443886,
+    "lon": 104.0616745,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Улигер",
+    "lat": 52.0125329,
+    "lon": 105.3646965,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Эдельвейс",
+    "lat": 51.6366646,
+    "lon": 103.6965086,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Идол",
+    "lat": 51.3558011,
+    "lon": 104.6162424,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Подушка",
+    "lat": 51.3518357,
+    "lon": 104.608168,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Турслет",
+    "lat": 53.0343832,
+    "lon": 108.3254845,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Падь Долгая (Глубокая)",
+    "lat": 52.2694311,
+    "lon": 105.7144403,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "зимовье Сказка",
+    "lat": 51.9641625,
+    "lon": 104.0947544,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "РАГУСА",
+    "lat": 52.5348437,
+    "lon": 107.0849112,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Лагерь рядом с мостом",
+    "lat": 51.3205173,
+    "lon": 104.68435,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Теремок байкал",
+    "lat": 52.4997103,
+    "lon": 106.9995457,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "пристанище",
+    "lat": 52.6403281,
+    "lon": 104.865927,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Цветок под снегом",
+    "lat": 53.1880951,
+    "lon": 107.3308182,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кемпинг",
+    "lat": 51.8701317,
+    "lon": 104.9338476,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Вершина",
+    "lat": 51.870099,
+    "lon": 104.9271361,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Губа Малая Песочная",
+    "lat": 52.3370484,
+    "lon": 105.7937711,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Урочище Медвежье - падь Тетериха",
+    "lat": 51.8736299,
+    "lon": 104.9985296,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Приют Странника",
+    "lat": 53.2263216,
+    "lon": 107.4211933,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кемпинг",
+    "lat": 52.5261956,
+    "lon": 106.0407188,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Мамайские помидоры",
+    "lat": 51.399528,
+    "lon": 104.8325093,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Стоянка на голой",
+    "lat": 51.371517,
+    "lon": 104.3849474,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Стоянка на Нитяной",
+    "lat": 51.3738502,
+    "lon": 104.276027,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Стоянка у озера",
+    "lat": 51.2805051,
+    "lon": 104.1616103,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Охотничий шалаш",
+    "lat": 51.2810696,
+    "lon": 104.1589434,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Стоянка проветриваемая",
+    "lat": 51.2580145,
+    "lon": 104.1823142,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Мамай Шале",
+    "lat": 51.3944764,
+    "lon": 104.8394206,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Фанерка",
+    "lat": 51.3967925,
+    "lon": 104.836607,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Хантер",
+    "lat": 51.3975423,
+    "lon": 104.8336351,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Баня-дом",
+    "lat": 51.3972745,
+    "lon": 104.8333132,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Сфера",
+    "lat": 51.3970821,
+    "lon": 104.8334849,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Пингвин-баня",
+    "lat": 51.3954562,
+    "lon": 104.8386348,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Пингвилла",
+    "lat": 51.3953332,
+    "lon": 104.8384109,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Пафос Баня",
+    "lat": 51.3956679,
+    "lon": 104.8380259,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Гараж",
+    "lat": 51.3955893,
+    "lon": 104.8378287,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Пафос Хаус",
+    "lat": 51.3954763,
+    "lon": 104.8379253,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Набережная 1",
+    "lat": 51.3945927,
+    "lon": 104.8373634,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Зимушка Космоса",
+    "lat": 51.3942839,
+    "lon": 104.836037,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Ямам Хаус",
+    "lat": 51.3939726,
+    "lon": 104.8356038,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Круг на поле",
+    "lat": 52.5262471,
+    "lon": 104.6109293,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "стоянка",
+    "lat": 51.4021471,
+    "lon": 104.0647151,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "стоянка",
+    "lat": 51.4147064,
+    "lon": 104.2036435,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Удобно переночевать в вэне",
+    "lat": 52.1493915,
+    "lon": 104.1363488,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "кемпинг с хорошим видом",
+    "lat": 52.9694961,
+    "lon": 106.8113746,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Загли",
+    "lat": 53.0480265,
+    "lon": 106.9467584,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8670292,
+    "lon": 104.7415914,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8000493,
+    "lon": 104.4660886,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7956914,
+    "lon": 104.4352856,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8017805,
+    "lon": 104.3756516,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7565536,
+    "lon": 104.0263183,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7338427,
+    "lon": 103.85612,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.842305,
+    "lon": 104.7054055,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7950153,
+    "lon": 104.6001385,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7956972,
+    "lon": 104.4271653,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.791678,
+    "lon": 104.2852138,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Укрытие / Место для ночлега",
+    "lat": 51.7762186,
+    "lon": 104.1805755,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7653295,
+    "lon": 104.1234328,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7544078,
+    "lon": 104.0455003,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.755106,
+    "lon": 104.0366165,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7561236,
+    "lon": 104.0074166,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8653429,
+    "lon": 104.7264804,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.82468,
+    "lon": 104.6911624,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8175544,
+    "lon": 104.6707784,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7922355,
+    "lon": 104.6161969,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7984666,
+    "lon": 104.4183795,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7270666,
+    "lon": 103.8127676,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8667061,
+    "lon": 104.7430728,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7951016,
+    "lon": 104.306377,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Укрытие / Место под палатку",
+    "lat": 51.8591923,
+    "lon": 104.7178142,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7961409,
+    "lon": 104.3317188,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.856964,
+    "lon": 104.7167553,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8179994,
+    "lon": 104.6767896,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8007904,
+    "lon": 104.6376931,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7962461,
+    "lon": 104.4385083,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7883155,
+    "lon": 104.2589056,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.808064,
+    "lon": 104.6468258,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7939798,
+    "lon": 104.6075158,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7552806,
+    "lon": 104.0010777,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.7982622,
+    "lon": 104.529616,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Слюдянка берег",
+    "lat": 51.6775396,
+    "lon": 103.7063802,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Коренная изба",
+    "lat": 51.3986247,
+    "lon": 104.8295257,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Штабная изба",
+    "lat": 51.3979975,
+    "lon": 104.8304111,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Домик у озера",
+    "lat": 51.3985389,
+    "lon": 104.8303675,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Юрта",
+    "lat": 51.3989731,
+    "lon": 104.8316535,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Бухта Еловая",
+    "lat": 52.0971635,
+    "lon": 105.5326032,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Удобно переночевать в вэне",
+    "lat": 52.1501362,
+    "lon": 104.1369853,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место для лагеря",
+    "lat": 51.8817861,
+    "lon": 104.8092172,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Урочище Семеновка",
+    "lat": 52.0045267,
+    "lon": 105.3471242,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.3541011,
+    "lon": 104.5934726,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Устье р. Шумиха",
+    "lat": 52.4781821,
+    "lon": 105.9338858,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Вблизи Бугульдейки",
+    "lat": 52.5124163,
+    "lon": 106.0013877,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Устье р. Отта",
+    "lat": 52.4770747,
+    "lon": 105.9311202,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Губа Песочная",
+    "lat": 52.3495474,
+    "lon": 105.8052668,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Мыс Чёрный",
+    "lat": 52.3862287,
+    "lon": 105.8362621,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Харгино",
+    "lat": 52.3205829,
+    "lon": 105.7770682,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Сенная Падь",
+    "lat": 52.284033,
+    "lon": 105.7375773,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Бухта Бабушка",
+    "lat": 52.2656445,
+    "lon": 105.7114122,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Бухта Синичка",
+    "lat": 52.2552732,
+    "lon": 105.6940987,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 51.8376548,
+    "lon": 104.7037548,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "место под палатки, костровище",
+    "lat": 53.2759798,
+    "lon": 107.535687,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "место под несколько палаток",
+    "lat": 53.4045522,
+    "lon": 107.7768601,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "место для палаток, пляж галь",
+    "lat": 53.1103667,
+    "lon": 107.0020831,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кемпинг",
+    "lat": 52.2621569,
+    "lon": 105.7107712,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Зимний Байкал",
+    "lat": 53.1292855,
+    "lon": 106.9933317,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кострище 2",
+    "lat": 51.9978531,
+    "lon": 105.3363206,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Хорошие места под кемпинг",
+    "lat": 51.781639,
+    "lon": 105.9815286,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "место под палатку",
+    "lat": 51.4703848,
+    "lon": 104.0467708,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Несколько хороших мест под кемпинг",
+    "lat": 53.5958558,
+    "lon": 108.8546585,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "место под палатку",
+    "lat": 51.452606,
+    "lon": 104.0299159,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку на горе в сосновом лесу",
+    "lat": 51.8689755,
+    "lon": 107.6025376,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Турбаза Утулик",
+    "lat": 51.5282001,
+    "lon": 104.0478069,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Автомобилист",
+    "lat": 51.9201651,
+    "lon": 106.1618491,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Юрточный кемпинг и база отдыха Мэбис",
+    "lat": 52.9310199,
+    "lon": 108.2206283,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Скальники ворона, клеопатра",
+    "lat": 51.9456122,
+    "lon": 103.8821739,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Место под палатку",
+    "lat": 52.238465,
+    "lon": 103.9889117,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Free campground by the lake, many locals camping",
+    "lat": 51.6550758,
+    "lon": 103.7337751,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Гайка",
+    "lat": 51.3982775,
+    "lon": 104.8336861,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Бухта Змеиная",
+    "lat": 53.477105,
+    "lon": 108.9849954,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Детский лагерь «Байкал»",
+    "lat": 51.6896217,
+    "lon": 103.6535772,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Территория курорта Усолье",
+    "lat": 52.8440666,
+    "lon": 103.5789628,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Урочище Семеновка",
+    "lat": 52.0070154,
+    "lon": 105.3520298,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Варначья Падь",
+    "lat": 51.9057663,
+    "lon": 105.0962995,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "кемпинг Тологой",
+    "lat": 51.7412795,
+    "lon": 107.4703904,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Taiga Pitch Offroad Camping",
+    "lat": 51.8273541,
+    "lon": 107.4924137,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Зимуха",
+    "lat": 51.9113181,
+    "lon": 104.5607904,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "База отдыха \"Сердце Мамая\"",
+    "lat": 51.4533927,
+    "lon": 104.7880389,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Массовый дикий кемпинг",
+    "lat": 53.1889679,
+    "lon": 107.3231883,
+    "source": "OpenStreetMap"
+  },
+  {
+    "name": "Кемпинг 'Байкальские Дюны'",
+    "lat": 52.4156,
+    "lon": 106.2813,
+    "source": "wikimapia"
+  },
+  {
+    "name": "Дикая стоянка (мыс Хобой)",
+    "lat": 53.5123,
+    "lon": 107.8765,
+    "source": "manual"
+  }
+]

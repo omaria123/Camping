@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Дикий туризм на Байкале | Кемпинги и палаточные стоянки</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    .leaflet-control-attribution a[href="https://leafletjs.com"] {
+        display: none; 
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+    
+    header {
+      background: linear-gradient(135deg, #1e5799 0%,#207cca 51%,#2989d8 100%);
+      color: white;
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+      font-weight: 300;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    
+    .container {
+      display: flex;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 20px;
+    }
+    
+    .sidebar {
+      width: 300px;
+      padding-right: 20px;
+    }
+    
+    .map-container {
+      flex-grow: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+    
+    .filter-section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+    
+    .filter-group {
+      margin-bottom: 1rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    select, input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    
+    button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+    
+    button:hover {
+      background-color: #3498db;
+    }
+    
+    .spot-info {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .spot-info h3 {
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    .spot-price {
+      font-weight: bold;
+      color: #27ae60;
+      margin: 0.5rem 0;
+    }
+    
+    .spot-image {
+      width: 100%;
+      height: 180px;
+      background-color: #eee;
+      margin: 1rem 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .spot-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .spot-image img:hover {
+      transform: scale(1.03);
+    }
+    
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 1.5rem;
+      }
+      
+      #map {
+        height: 400px;
+      }
+    }
+
+    .leaflet-popup-content {
+      min-width: 250px;
+    }
+    
+    .popup-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+    
+    .popup-price {
+      font-weight: bold;
+      color: #27ae60;
+      margin: 0.5rem 0;
+    }
+    
+    .popup-image {
+      width: 100%;
+      height: 120px;
+      background-color: #eee;
+      margin: 0.5rem 0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .popup-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      background: #f0f0f0;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .tag:hover {
+      background: #e0e0e0;
+    }
+    
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin: 0 10px;
+    }
+    
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      border-radius: 3px;
+    }
+
+    .map-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #map {
+      height: 65vh;
+      min-height: 500px;
+    }
+    
+    .map-stats-container {
+      padding: 20px;
+      background: white;
+    }
+    
+    .chart-container {
+      height: 300px;
+    }
+    
+    .popup-district {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+    
+    .spot-district {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Дикий туризм на Байкале</h1>
+      <p class="subtitle">Интерактивная карта кемпингов и палаточных стоянок</p>
+    </div>
+  </header>
+  
+  <div class="container">
+    <aside class="sidebar">
+      <div class="filter-section">
+        <h2>Фильтры</h2>
+        <div class="filter-group">
+          <label for="district-filter">Район:</label>
+          <select id="district-filter">
+            <option value="all">Все районы</option>
+            <!-- Опции районов будут добавлены скриптом -->
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="price-filter">Цена:</label>
+          <select id="price-filter">
+            <option value="all">Любая</option>
+            <option value="free">Бесплатные</option>
+            <option value="paid">Платные</option>
+          </select>
+        </div>
+        <button id="apply-filters">Применить фильтры</button>
+      </div>
+      
+      <div class="spot-info">
+        <h3>Выберите место на карте</h3>
+        <p>Кликните на маркер, чтобы увидеть подробную информацию.</p>
+        <div class="spot-image">
+          <img src="https://via.placeholder.com/300x180?text=Выберите+место" alt="Изображение места">
+        </div>
+        <p class="spot-district">Район: -</p>
+        <p class="spot-price">Цена: -</p>
+        <p class="spot-description">Описание появится здесь после выбора места.</p>
+      </div>
+    </aside>
+    
+    <main class="map-container">
+      <div id="map"></div>
+      <div class="map-stats-container">
+        <h3>Статистика по районам</h3>
+        <div class="chart-container">
+          <canvas id="districtsChart"></canvas>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <footer>
+    <div class="footer-content">
+      <p>© 2025 Дикий туризм на Байкале. Карта предоставлена OpenStreetMap</p>
+    </div>
+  </footer>
+
+  <script>
+    const campingSpots = [
+    {
+      "name": "Чёрная Падь",
+      "lat": 51.8892101,
+      "lon": 105.0375745,
+      "description": "Уединённый кемпинг в лесной зоне с хвойными деревьями. Места для палаток на ровной почве, рядом родник с питьевой водой. Удобств — нет, дрова собираются самостоятельно. Костровые зоны есть, но мангалы — свои. Столики отсутствуют. Природа спокойная, много птиц, хорошая тишина.",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=670481277033e12fbd197a2a3fa4f560_l-5275032-images-thumbs&n=13",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Турбаза Прибайкальского национального парка",
+      "lat": 51.9297592,
+      "lon": 105.2513756,
+      "description": "Организованный кемпинг с деревянными домиками и палаточными площадками. Есть туалеты, душевые, столики и мангальные зоны. Вода — централизованный источник. Расположен в хвойном лесу рядом с озером. Подходит для комфортного отдыха с семьёй.",
+      "price": "пропуск на территорию от 300 руб.",
+      "image": "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_678567ac67ebbf6b1f1c1b62_6792887e67ebbf6b1fa87517/scale_1200",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Мыс Соболев",
+      "lat": 51.899231,
+      "lon": 105.1556702,
+      "description": "Палаточный кемпинг на скалистом мысе с видом на Байкал. Удобств нет, всё дрова и вода — самостоятельно. Места для костра выделены. Природа: смешанный лес, скалы и открытый простор.",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=8f3b31e0ba56650e0ec9e6d2528cdef3_l-4936854-images-thumbs&n=13",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Бухта Сухая",
+      "lat": 52.3022245,
+      "lon": 105.7556525,
+      "description": "Песчаный пляж с небольшой бухтой. Есть оборудованные мангальные зоны и столики, место для костра. Вода чистая, доступ к Байкалу лёгкий. Лес вокруг смешанный, много солнца.",
+      "price": "Бесплатно",
+      "image": "https://nature.baikal.ru/phs/norm/31/31649.jpg?1295667766",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Зимовье Сказка",
+      "lat": 51.9641625,
+      "lon": 104.0947544,
+      "description": "Кемпинг с зимним укрытием, навесами и запасом дров. Есть туалеты и места для костров. Расположен в таёжном лесу. Подходит для зимнего отдыха и долгих стоянок.",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=d0628cf318e9ee34bbbfc2e98a19c436_l-4231391-images-thumbs&n=13",
+      "district": "Шелеховский район"
+    },
+    {
+      "name": "РАГУСА",
+      "lat": 52.5348437,
+      "lon": 107.0849112,
+      "description": "Организованный кемпинг с удобствами: туалеты, душ, столики, мангальные зоны. Территория огорожена и охраняется. Находится в лесистой местности с хвойными деревьями. Подходит для комфортного отдыха с семьёй и друзьями.",
+      "price": "150р/сутки",
+      "image": "https://sun9-79.userapi.com/impg/B2pPVoUArL2LRTXyFe1vs71GdL-Q8o-5WA2UjQ/hj-nWxeYC6E.jpg?size=510x341&quality=96&sign=4ce7d5b31d8b60909c19959abf66503&type=album",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Теремок байкал",
+      "lat": 52.4997103,
+      "lon": 106.9995457,
+      "description": "Кемпинг с деревянными домиками и палаточными площадками. Есть туалеты, душ, мангалы и столы для пикника. Лесной массив вокруг, рядом озеро. Очень удобно для туристов, предпочитающих комфорт.",
+      "price": "от 1300р",
+      "image": "https://avatars.mds.yandex.net/i?id=b986216cc9b4f8f3a9a72a4ece91c0751ba8d02f-5589536-images-thumbs&n=13",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Цветок под снегом",
+      "lat": 53.1880951,
+      "lon": 107.3308182,
+      "description": "Дикий кемпинг с минимальной инфраструктурой. Местность — таёжный лес, много мха и хвои. Удобств нет, дрова — своими силами, костровые площадки не оборудованы. Для опытных туристов, любящих уединение.",
+      "price": "от 800 руб.",
+      "image": "https://avatars.dzeninfra.ru/get-zen_doc/3540570/pub_63b401061c8b7a2c47108189_63b54355db6c74791463bf6d/scale_1200",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Губа Малая Песочная",
+      "lat": 52.3370484,
+      "lon": 105.7937711,
+      "description": "Песчаный пляж с удобными зонами для палаток. Есть мангалы и столики, костровище оборудовано. Вода чистая, берег удобен для купания. Окружён смешанным лесом.",
+      "price": "Бесплатно",
+      "image": "https://nature.baikal.ru/phs/norm/10/109918.jpg?1570762138",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Мамайские помидоры",
+      "lat": 51.399528,
+      "lon": 104.8325093,
+      "description": "Небольшой лесной кемпинг с ограниченными удобствами. Нет туалетов, дрова собираются самостоятельно. Места для костров и палаток на ровной почве. Лес хвойный с небольшими полянами.",
+      "price": "от 18 000 руб./сутки",
+      "image": "https://avatars.mds.yandex.net/i?id=60ead7ec71cc3289b0477a1731f0d386_l-9266026-images-thumbs&n=13",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Мамай Шале",
+      "lat": 51.3944764,
+      "lon": 104.8394206,
+      "description": "Небольшой кемпинг с деревянными шале и палаточными местами. Есть туалеты и места для мангалов, столики для пикника. Находится в сосновом лесу, вокруг тишина и свежий воздух.",
+      "price": "от 12000 руб.",
+      "image": "https://211company.ru/upload/resize_cache/webp/sprint.editor/410/4103564ea76fb3a247419d233b9cab6d.webp",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Фанерка",
+      "lat": 51.3967925,
+      "lon": 104.836607,
+      "description": "Кемпинг в лесной зоне с минимальными удобствами — туалетов нет, дрова — свои. Подходящее место для тех, кто любит дикий отдых среди сосен. Есть оборудованные костровые площадки.",
+      "price": "от 5000 руб.",
+      "image": "https://avatars.mds.yandex.net/get-altay/11886651/2a0000018dffe912fc97aad61befb2d1d335/XXXL",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Место под палатку",
+      "lat": 51.7338427,
+      "lon": 103.85612,
+      "description": "Дикая стоянка без удобств, в смешанном лесу. Много пространства для палаток, костры разрешены. Нет столиков и мангалов, все снаряжение берите с собой.",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/get-altay/1371862/2a00000162b501164bc68a550f5e608cc1b2/XXL_height",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Змеиная\"",
+      "lat": 51.842305,
+      "lon": 104.7054055,
+      "description": "Песчаная бухта с оборудованными мангальными зонами и столами. Есть места для палаток на песке и траве. Вода в бухте чистая, подходит для купания. Окружена сосновым лесом.",
+      "price": "Место для палатки — платный: 500–800 ₽/ночь (палатка)",
+      "image": "https://well03.ru/upload/medialibrary/942/942b656a8d7b36da54e3dfa12de6ee9b.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Бабушка\"",
+      "lat": 51.7950153,
+      "lon": 104.6001385,
+      "description": "Маленькая бухта с каменистым берегом. Удобств нет, костровые зоны организованы стихийно. Идеально для уединённого дикого кемпинга. Вокруг смешанный лес с хвойными деревьями.",
+      "price": "Бесплатно",
+      "image": "https://sun9-31.userapi.com/impg/c858520/v858520620/1603bf/Kvx3KSDgd5o.jpg?size=604x341&quality=96&sign=d86cdb87fdbae688c9e65e4fb9007ae0&type=album",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта\"Сенная\"",
+      "lat": 51.7956972,
+      "lon": 104.4271653,
+      "description": "Каменистый берег с небольшими площадками для палаток. Удобств нет, дрова и вода — самостоятельно. Костровища есть, но без мангалов. Лес смешанный, рядом есть тропы для прогулок.",
+      "price": "Бесплатно",
+      "image": "https://nature.baikal.ru/phs/norm/11/11959.jpg?1295665953",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Песчаная\"",
+      "lat": 51.791678,
+      "lon": 104.2852138,
+      "description": "Песчаный пляж с просторными местами для палаток. Мангалов и столиков нет, костровые зоны организованы. Лес хвойно-лиственный, берег пологий, подходит для купания.",
+      "price": "300 руб./чел/сутки (палатка +50 руб.)",
+      "image": "https://avatars.mds.yandex.net/i?id=59afd15ee17ffe520ddbf627a0b875f0_l-12898824-images-thumbs&n=13",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Ая\"",
+      "lat": 51.7762186,
+      "lon": 104.1805755,
+      "description": "Уютная бухта с песчаным берегом, оборудованная столами и мангалами. Есть места для палаток на открытых площадках. Лес хвойный, рядом тропы для прогулок.",
+      "price": "Палаточное место: 300 руб./сутки\n\nАренда беседки: 1500 руб./день\n\nВъезд на авто: 500 руб.",
+      "image": "https://i.pinimg.com/736x/bd/45/4e/bd454e9294af0443209d2eefceaff599.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Крестовая\"",
+      "lat": 51.7544078,
+      "lon": 104.0455003,
+      "description": "Место с каменистым и песчаным берегом, оборудовано костровыми площадками. Удобств нет, туалеты отсутствуют. Лес хвойный, тихое и уединённое место.",
+      "price": "Палаточное место: 400 руб/сутки\n\nАренда домика: 2500 руб/ночь (2 чел.)\n\nБаня: 1500 руб/час (по предзаказу)",
+      "image": "https://avatars.mds.yandex.net/i?id=951d677f3f2e59745d09e4f02f15e4c2_l-5332625-images-thumbs&n=13",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Малый Крестовый\"",
+      "lat": 51.755106,
+      "lon": 104.0366165,
+      "description": "Небольшая бухта с местами для палаток на траве. Мангалов и столов нет, костры разрешены. Природа – хвойный лес и скалистый берег.",
+      "price": "Национальный парк: 150 руб./чел (разовый взнос)\n\nПарковка: 200 руб./сутки (только для внедорожников)",
+      "image": "",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Каменный Завод\"",
+      "lat": 51.7561236,
+      "lon": 104.0074166,
+      "description": "Каменистый берег с небольшими площадками для палаток. Удобств нет, дрова и вода — самостоятельно. Есть костровые зоны, но мангалов нет. Лес хвойный, место спокойное и уединённое.",
+      "price": "Бесплатно",
+      "image": "",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Листвянка (центр)",
+      "lat": 51.8653429,
+      "lon": 104.7264804,
+      "description": "Организованное место с туристической инфраструктурой. Есть туалеты, кафе, столики и мангальные зоны. Пляж смешанный, рядом лес и набережная. Подходит для комфортного кемпинга.",
+      "price": "300-500 руб/день",
+      "image": "https://sport-marafon.ru/upload/blog/img/32/2059289/2059289-15.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Базарная\"",
+      "lat": 51.7922355,
+      "lon": 104.6161969,
+      "description": "Песчаный и каменистый берег с оборудованными костровищами. Столики и мангалы отсутствуют, удобства минимальны. Окружена хвойным лесом.",
+      "price": "Бесплатно",
+      "image": "https://c3e8dd8511de-sibguide-static.s3.ru1.storage.beget.cloud/uploads/2025/02/buhta-bazarnaya-2-6633cdfdd6731.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Урочище \"Черный Камень\"",
+      "lat": 51.7984666,
+      "lon": 104.4183795,
+      "description": "Дикая стоянка без удобств, много дров, места для палаток на траве и камнях. Природа — хвойный лес и скалы. Тихо и уединённо.",
+      "price": "Бесплатно",
+      "image": "https://nature.baikal.ru/phs/norm/12/122276.jpg?1730462228",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Река Снежная (устье)",
+      "lat": 51.7270666,
+      "lon": 103.8127676,
+      "description": "Кемпинг у устья реки с чистой пресной водой. Нет туалетов и столиков, костры разрешены. Много пространства для палаток, окружение — смешанный лес.",
+      "price": "Бесплатно",
+      "image": "https://catcher.fish/wp-content/uploads/2017/06/snejnaya.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Листвянский причал",
+      "lat": 51.8667061,
+      "lon": 104.7430728,
+      "description": "Площадка рядом с причалом, оборудована столиками и мангалами. Удобств немного, туалеты рядом в городской зоне. Природа — лесная опушка с видом на воду.",
+      "price": "Платная парковка (200 руб/час)",
+      "image": "https://avatars.mds.yandex.net/get-altay/4598810/2a0000018144547f6710ae0206fbcd30152d/XXXL",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Таёжная\"",
+      "lat": 51.7951016,
+      "lon": 104.306377,
+      "description": "Дикий кемпинг с костровыми зонами, без столиков и туалетов. Места для палаток на траве и песке. Окружена густым хвойным лесом.",
+      "price": "Бесплатно, но мусорный сбор 200 руб",
+      "image": "https://avatars.dzeninfra.ru/get-zen_doc/1585195/pub_64f03ee684b32674c70a267d_64f03f1d5d254b7d071d6152/scale_2400",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Центральный пляж Листвянки",
+      "lat": 51.8591923,
+      "lon": 104.7178142,
+      "description": "Обустроенный пляж с зоной для палаток, мангалами и столиками. Есть туалеты и мусорные баки. Вокруг – лес и прогулочные дорожки.",
+      "price": "500 руб/день",
+      "image": "https://avatars.mds.yandex.net/i?id=b9ccb173204be17b74d356648945c6a596a5deb0-9046334-images-thumbs&n=13",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Песчаная\" (южный сектор)",
+      "lat": 51.8179994,
+      "lon": 104.6767896,
+      "description": "Песчаный берег с просторными местами для палаток. Мангалы и столики отсутствуют, костры разрешены. Природа — лес и каменистые выступы.",
+      "price": "Платный въезд 700 руб",
+      "image": "https://library.kuzstu.ru/method/elvistavki/otdih/85%20s/buhta%20pechannaia%201.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Тропа \"Байкальские ветра\"",
+      "lat": 51.8007904,
+      "lon": 104.6376931,
+      "description": "Палаточный кемпинг вдоль тропы, удобств нет, открытые места. Место ветреное, лес редкий, много открытых пространств.",
+      "price": "Бесплатно",
+      "image": "https://static.tildacdn.com/tild6463-6464-4237-a439-356338393036/-.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Харанса\"",
+      "lat": 51.7939798,
+      "lon": 104.6075158,
+      "description": "Песчаный берег с несколькими местами для палаток и костровищами. Удобств нет, дрова — своими силами. Лес хвойный, тишина и уединение.",
+      "price": "Платный въезд: 500 руб/авто",
+      "image": "https://baikal360.org/wp-content/uploads/2015/12/IMG_1558.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Бухта \"Крохалиная\"",
+      "lat": 52.2656445,
+      "lon": 105.7114122,
+      "description": "Большая бухта с пляжными местами, есть оборудованные мангалы и столики. Туалеты отсутствуют. Лес вокруг смешанный.",
+      "price": "Бесплатно",
+      "image": "https://live.staticflickr.com/5728/22062714471_2d4301dbb4_b.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Песчаный пляж \"Солнечный\"",
+      "lat": 52.2552732,
+      "lon": 105.6940987,
+      "description": "Песчаный пляж с удобствами: столики и мангальные зоны. Туалетов нет, костры разрешены. Много солнца, лес рядом.",
+      "price": "Плата за въезд: 500 руб./авто",
+      "image": "https://static.mk.ru/upload/entities/2020/08/02/04/articles/facebookPicture/ba/61/eb/e6/15ce8989f7d9b2d989fa09872cb7e529.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Место под палатку",
+      "lat": 51.8376548,
+      "lon": 104.7037548,
+      "description": "Дикая стоянка в лесу без удобств. Места ровные, костры разрешены, нет столиков. Подойдёт для тех, кто любит уединение.",
+      "price": "Бесплатно",
+      "image": "https://i3.photo.2gis.com/images/branch/0/30258560112068309_64a1.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Место под палатки, костровище",
+      "lat": 53.2759798,
+      "lon": 107.535687,
+      "description": "Большая площадка для палаток с костровой зоной, столиков и туалетов нет. Окружена таёжным лесом, атмосфера дикой природы.",
+      "price": "Бесплатно",
+      "image": "https://i7.photo.2gis.com/images/geo/0/30258560114896509_7446.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Место под несколько палаток",
+      "lat": 53.4045522,
+      "lon": 107.7768601,
+      "description": "Просторная площадка для палаток в таёжном лесу. Удобств нет, костры разрешены, мангалов и столиков нет. Очень уединённо, вокруг густой лес.",
+      "price": "Бесплатно",
+      "image": "https://i8.photo.2gis.com/images/geo/0/30258560114896526_014d.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Место для палаток, пляж галь",
+      "lat": 53.1103667,
+      "lon": 107.0020831,
+      "description": "Пляж с галькой и площадками для палаток. Удобств нет, костровые зоны не оборудованы. Лес редкий, берег каменистый, природа суровая.",
+      "price": "бесплатно",
+      "image": "https://cdn.fishki.net/upload/post/2018/12/10/2798626/tn/a8a71620203661c901df47e182574b8c.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Кемпинг",
+      "lat": 52.2621569,
+      "lon": 105.7107712,
+      "description": "Кемпинг с минимальными удобствами: костровые зоны и столики, туалетов нет. Расположен в лесу с доступом к воде. Идеально для спокойного отдыха.",
+      "price": "200–500 ₽/ночь",
+      "image": "https://i4.photo.2gis.com/images/geo/0/30258560110972118_1617.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Зимний Байкал",
+      "lat": 53.1292855,
+      "lon": 106.9933317,
+      "description": "Место для зимнего кемпинга с навесами и местами для костров. Удобств почти нет, вода добывается из снега. Окружён хвойным лесом.",
+      "price": "Бесплатно",
+      "image": "https://i5.photo.2gis.com/images/geo/0/30258560088923032_dd4e.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Кострище 2",
+      "lat": 51.9978531,
+      "lon": 105.3363206,
+      "description": "Костровая зона без удобств, открытое пространство для палаток. Дрова собираются самостоятельно. Природа — смешанный лес.",
+      "price": "Бесплатно",
+      "image": "https://i8.photo.2gis.com/photo-gallery/14874785-1039-4f45-8814-492da8427966.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Хорошие места под кемпинг",
+      "lat": 51.781639,
+      "lon": 105.9815286,
+      "description": "Дикие площадки для палаток в лесу, без инфраструктуры. Костры разрешены, мангалов нет. Много зелени, тихо и уединённо.",
+      "price": "Бесплатно",
+      "image": "https://i1.photo.2gis.com/photo-gallery/92df13ff-987c-405f-83b3-85574ffc3f9e.jpg",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Место под палатку",
+      "lat": 51.4703848,
+      "lon": 104.0467708,
+      "description": "Уединённая стоянка без удобств в хвойном лесу. Ровные площадки для палаток, костры разрешены.",
+      "price": "Бесплатно",
+      "image": "https://i1.photo.2gis.com/photo-gallery/52c72b74-0ffd-4b38-b4bd-26506351f771.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Несколько хороших мест под кемпинг",
+      "lat": 53.5958558,
+      "lon": 108.8546585,
+      "description": "Большой участок с несколькими площадками, без удобств. Костровые зоны имеются. Окружён таёжным лесом..",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=69856342fb891b3b81fe3b5d54747550_l-4231472-images-thumbs&n=13",
+      "district": "Баргузинский район"
+    },
+    {
+      "name": "Место под палатку",
+      "lat": 51.452606,
+      "lon": 104.0299159,
+      "description": "Дикая стоянка в сосновом лесу, удобств нет. Костры разрешены, есть ровные площадки.",
+      "price": "Бесплатно",
+      "image": "https://i6.photo.2gis.com/images/geo/0/30258560072513458_9b0a.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Место под палатку на горе в сосновом лесу",
+      "lat": 51.8689755,
+      "lon": 107.6025376,
+      "description": "Высокогорная стоянка с видом, в сосновом лесу. Удобств нет, костры разрешены, дрова — своими силами. Отличное место для уединённого отдыха.",
+      "price": "Бесплатно",
+      "image": "https://i7.photo.2gis.com/images/geo/0/30258560060610151_0381.jpg",
+      "district": "Советский район"
+    },
+    {
+      "name": "Автомобилист",
+      "lat": 51.9201651,
+      "lon": 106.1618491,
+      "description": "Кемпинг с возможностью подъезда на автомобиле. Места для палаток на ровной площадке, есть костровые зоны. Удобств минимум — туалетов и столиков нет. Окружён хвойным лесом.",
+      "price": "Бесплатно",
+      "image": "https://sun9-80.userapi.com/impf/c9333/v9333603/1200/sau-qubKtWQ.jpg?size=604x312&quality=96&sign=f8d916ff3a58cbf416968ef70202ddda&type=album",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Юрточный кемпинг и база отдыха Мэбис",
+      "lat": 52.9310199,
+      "lon": 108.2206283,
+      "description": "Организованный кемпинг с юртами, туалетами, душем, столиками и мангалами. Территория охраняется. Расположен в смешанном лесу с открытыми пространствами.",
+      "price": "цена от 2 660 ₽ за ночь на двоих.",
+      "image": "https://avatars.mds.yandex.net/get-altay/5517178/2a0000018069788ef0d298df65cabe2cc74e/XXL_height",
+      "district": "Прибайкальский район"
+    },
+    {
+      "name": "Скальники ворона, клеопатра",
+      "lat": 51.9456122,
+      "lon": 103.8821739,
+      "description": "Дикая стоянка у скалистых выходов, удобств нет. Костры разрешены, дрова — свои. Природа — хвойный лес и каменистый рельеф.",
+      "price": "Бесплатно",
+      "image": "https://baikalgo.ru/wp-content/uploads/2023/10/faraon-srednjaja.jpg",
+      "district": "Шелеховский район"
+    },
+    {
+      "name": "Место под палатку",
+      "lat": 52.238465,
+      "lon": 103.9889117,
+      "description": "Небольшая площадка в лесу, без удобств. Костры разрешены, места ровные. Окружение — смешанный лес.",
+      "price": "Бесплатно",
+      "image": "https://i1.photo.2gis.com/images/geo/0/30258560061663993_a7e8.jpg",
+      "district": "Шелеховский район"
+    },
+    {
+      "name": "Free campground by the lake, many locals camping",
+      "lat": 51.6550758,
+      "lon": 103.7337751,
+      "description": "Свободный кемпинг у озера, часто используется местными. Удобств нет, дрова и вода — самостоятельно. Песчаный берег, лес рядом.",
+      "price": "Бесплатно",
+      "image": "https://i1.photo.2gis.com/photo-gallery/e7403faa-816d-459a-ace6-5385f2904974.jpg",
+      "district": "Слюдянский район"
+    },
+    {
+      "name": "Гайка",
+      "lat": 51.3982775,
+      "lon": 104.8336861,
+      "description": "Небольшая лесная поляна для палаток без удобств. Костры разрешены, дрова собираются самостоятельно. Окружена соснами, тихое и уединённое место.",
+      "price": "Бесплатно",
+      "image": "https://i1.photo.2gis.com/images/geo/0/30258560061664016_0750.jpg",
+      "district": "Кабанский район"
+    },
+    {
+      "name": "Урочище Семеновка",
+      "lat": 52.0070154,
+      "lon": 105.3520298,
+      "description": "Дикий кемпинг в смешанном лесу, без инфраструктуры. Есть площадки для палаток, костровые зоны, но нет туалетов и столиков.",
+      "price": "Бесплатно",
+      "image": "https://storage.weacom.ru/v7344/1a/4EYbmrfqrMQ.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Варначья Падь",
+      "lat": 51.9057663,
+      "lon": 105.0962995,
+      "description": "Поляна в хвойном лесу, подходит для палаточного кемпинга. Удобств нет, костры разрешены, мангалов и столов нет.",
+      "price": "Бесплатно",
+      "image": "https://i4.photo.2gis.com/images/geo/0/30258560075865238_ec56.jpg",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "кемпинг Тологой",
+      "lat": 51.7412795,
+      "lon": 107.4703904,
+      "description": "Организованный кемпинг с туалетами, мангалами и столиками. Находится в таёжном лесу, рядом протекает речка.",
+      "price": "100-300 р",
+      "image": "https://i5.photo.2gis.com/photo-gallery/f86c0e64-aa53-425a-b0a4-278553fababc.jpg",
+      "district": "Иволгинский район"
+    },
+    {
+      "name": "Taiga Pitch Offroad Camping",
+      "lat": 51.8273541,
+      "lon": 107.4924137,
+      "description": "Кемпинг для любителей оффроуда, есть мангальные зоны и места для палаток. Удобств минимум — туалеты и столы отсутствуют. Лесная местность.",
+      "price": "бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=065fe7218120122564f30b82ee99d0d4_l-5232827-images-thumbs&n=13",
+      "district": "Советский район"
+    },
+    {
+      "name": "Зимуха",
+      "lat": 51.9113181,
+      "lon": 104.5607904,
+      "description": "Дикая стоянка без удобств, много дров, места для палаток на траве. Окружение — хвойный лес и скалы.",
+      "price": "бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=8cc659e973a6008b51626d207585c814bcc8c3ed-7016679-images-thumbs&n=13",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Массовый дикий кемпинг",
+      "lat": 53.1889679,
+      "lon": 107.3231883,
+      "description": "Большая открытая площадка для палаток без инфраструктуры. Костры разрешены, туалетов нет. Место в таёжном лесу.",
+      "price": "Бесплатно",
+      "image": "https://i0.photo.2gis.com/images/geo/0/30258560050655233_7d1b.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Бухта Змеиная",
+      "lat": 53.477105,
+      "lon": 108.9849954,
+      "description": "Большая бухта с оборудованными костровыми зонами и столиками. Туалетов нет. Песчаный и каменистый берег, окружён лесом.",
+      "price": "1000руб./сутки",
+      "image": "https://nature.baikal.ru/phs/norm/27/2743.jpg?1295667531",
+      "district": "Баргузинский район"
+    },
+    {
+      "name": "Кемпинг 'Байкальские Дюны'",
+      "lat": 52.259305,
+      "lon": 105.698581,
+      "description": "Организованный кемпинг с мангалами, столиками и туалетами. Песчаный берег, смешанный лес вокруг. Отличное место для семейного отдыха.",
+      "price": "от 8000 руб.",
+      "image": "https://cdn.lifehacker.ru/wp-content/uploads/2022/07/shutterstock_1920137633_1657207243-e1657207283220.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Большая медведица",
+      "lat": 53.031097,
+      "lon": 106.850468,
+      "description": "Дикий кемпинг в горах с площадками для палаток. Удобств нет, костры разрешены, дрова — своими силами. Природа — хвойный лес и скалистые склоны.",
+      "price": "от 1300р",
+      "image": "https://mirturbaz.ru/uploads/picture/pic/255797/big_image.jpg",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Цветок под снегом",
+      "lat": 53.188319,
+      "lon": 107.330859,
+      "description": "Место с площадками для палаток, костровых зон, столиков и мангалов нет. Удобств нет. Окружено таёжным лесом, близко к воде.",
+      "price": "от 1000 руб.",
+      "image": "https://avatars.mds.yandex.net/i?id=0142afe7e42741cf46c4eb9a476fb350_l-8232950-images-thumbs&n=13",
+      "district": "Ольхонский район"
+    },
+    {
+      "name": "Лукоморье",
+      "lat": 52.981613,
+      "lon": 108.280173,
+      "description": "Уютный кемпинг с мангалами и столиками, туалетов нет. Расположен в смешанном лесу у озера. Природа живописная и тихая.",
+      "price": "1000 руб. с человека",
+      "image": "https://avatars.mds.yandex.net/get-altay/11748256/2a00000191277d1840b2858f454d2370d860/orig",
+      "district": "Прибайкальский район"
+    },
+    {
+      "name": "Мягкая карга",
+      "lat": 53.587173,
+      "lon": 108.8921,
+      "description": "Дикая стоянка без удобств, костры разрешены. Площадки для палаток на траве в таёжном лесу. Место уединённое и спокойное.",
+      "price": "800 руб. с человека",
+      "image": "https://avatars.mds.yandex.net/i?id=42a772c86958ee5fd08b3ff8af3c00fc_l-5233220-images-thumbs&n=13",
+      "district": "Баргузинский район"
+    },
+    {
+      "name": "Фактория",
+      "lat": 52.038759,
+      "lon": 105.414263,
+      "description": "Организованное место с мангалами и столиками, туалеты отсутствуют. Лесной кемпинг с доступом к воде, много дров.",
+      "price": "1000 руб. с человека",
+      "image": "https://avatars.mds.yandex.net/get-altay/1880508/2a0000016dc6d2bfa320f9ff4f2aa3a11f05/XXL_height",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Туристический кемпинг Падь Чёрная",
+      "lat": 51.889242,
+      "lon": 105.037498,
+      "description": "Организованный кемпинг с мангалами, столиками и туалетами. Расположен в смешанном лесу, берег озера рядом.",
+      "price": "Бесплатно",
+      "image": "https://avatars.mds.yandex.net/i?id=3aebcade53bd383b15d950bc289803a4_l-4598925-images-thumbs&n=13",
+      "district": "Иркутский район"
+    },
+    {
+      "name": "Ангасолка",
+      "lat": 51.732424,
+      "lon": 103.829297,
+      "description": "Дикий кемпинг с местами для палаток и костровищами. Удобств нет, лес смешанный, берег озера рядом.",
+      "price": "от 1000 руб.",
+      "image": "https://www.kp.ru/afisha/wp-content/uploads/2019/03/Ангасолка_1.jpg",
+      "district": "Слюдянский район"
+    }
+]; 
+    
+    const DEFAULT_IMAGE = "https://i.pinimg.com/736x/e9/d4/76/e9d4764dbff6c1e3efa104f948e76ab8.jpg";
+    const map = L.map('map').setView([52, 105], 7);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // инициализация маркеров
+    const markers = campingSpots.map(spot => {
+      const marker = L.marker([spot.lat, spot.lon]);
+      
+      const popupContent = `
+        <div class="popup-content">
+          <div class="popup-title">${spot.name}</div>
+          <div class="popup-district">Район: ${spot.district}</div>
+          <div class="popup-price">Цена: ${spot.price}</div>
+          <div class="popup-image">
+            <img src="${spot.image || DEFAULT_IMAGE}" alt="${spot.name}">
+          </div>
+          <div class="popup-description">${spot.description}</div>
+        </div>
+      `;
+      
+      marker.bindPopup(popupContent);
+      marker.on('click', updateSpotInfo.bind(null, spot));
+      return marker;
+    });
+
+    markers.forEach(marker => marker.addTo(map));
+
+    // фильтр районов
+    function initDistrictFilter() {
+      const districtFilter = document.getElementById('district-filter');
+      const districts = [...new Set(campingSpots.map(spot => spot.district))];
+      
+      districts.forEach(district => {
+        const option = document.createElement('option');
+        option.value = district;
+        option.textContent = district;
+        districtFilter.appendChild(option);
+      });
+    }
+
+    // обновление информации о месте
+    function updateSpotInfo(spot) {
+      document.querySelector('.spot-info h3').textContent = spot.name;
+      document.querySelector('.spot-district').textContent = `Район: ${spot.district}`;
+      document.querySelector('.spot-price').textContent = `Цена: ${spot.price}`;
+      document.querySelector('.spot-description').textContent = spot.description;
+      
+      const img = document.querySelector('.spot-image img');
+      img.src = spot.image || DEFAULT_IMAGE;
+      img.alt = spot.name;
+    }
+
+    // фильтрация
+    document.getElementById('apply-filters').addEventListener('click', applyFilters);
+
+    function applyFilters() {
+      const district = document.getElementById('district-filter').value;
+      const price = document.getElementById('price-filter').value;
+      
+      markers.forEach(marker => map.removeLayer(marker));
+      
+      campingSpots.forEach(spot => {
+        const districtMatch = district === 'all' || spot.district === district;
+        const priceMatch = price === 'all' || 
+                         (price === 'free' && spot.price.toLowerCase().includes('бесплатно')) ||
+                         (price === 'paid' && !spot.price.toLowerCase().includes('бесплатно'));
+        
+        if (districtMatch && priceMatch) {
+          const marker = markers.find(m => 
+            m.getLatLng().lat === spot.lat && 
+            m.getLatLng().lng === spot.lon
+          );
+          if (marker) marker.addTo(map);
+        }
+      });
+    }
+
+    // статистика по районам
+    function calculateDistrictStats() {
+      const stats = {};
+      
+      campingSpots.forEach(spot => {
+        if (!stats[spot.district]) {
+          stats[spot.district] = { count: 0, prices: [] };
+        }
+        stats[spot.district].count++;
+        
+        const priceMatch = spot.price.match(/(\d+)/);
+        if (priceMatch) stats[spot.district].prices.push(parseInt(priceMatch[1]));
+      });
+      
+      Object.keys(stats).forEach(district => {
+        stats[district].avgPrice = stats[district].prices.length > 0 
+          ? Math.round(stats[district].prices.reduce((a, b) => a + b, 0) / stats[district].prices.length)
+          : 0;
+      });
+      
+      return stats;
+    }
+
+    function renderDistrictChart() {
+      const stats = calculateDistrictStats();
+      const districts = Object.keys(stats);
+      
+      const ctx = document.getElementById('districtsChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: districts,
+          datasets: [
+            {
+              label: 'Количество мест',
+              data: districts.map(d => stats[d].count),
+              backgroundColor: 'rgba(54, 162, 235, 0.7)',
+              yAxisID: 'y-count'
+            },
+            {
+              label: 'Средняя цена (руб)',
+              data: districts.map(d => stats[d].avgPrice),
+              backgroundColor: 'rgba(255, 99, 132, 0.7)',
+              type: 'line',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 2,
+              yAxisID: 'y-price'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            'y-count': {
+              type: 'linear',
+              position: 'left',
+              title: { display: true, text: 'Количество мест' },
+              min: 0,
+              max: Math.max(...Object.values(stats).map(s => s.count)) + 5,
+              ticks: { stepSize: 5 }
+            },
+            'y-price': {
+              type: 'linear',
+              position: 'right',
+              title: { display: true, text: 'Средняя цена (руб)' },
+              grid: { drawOnChartArea: false },
+              min: 0
+            }
+          }
+        }
+      });
+    }
+
+    // инициализация
+    document.addEventListener('DOMContentLoaded', () => {
+      if (campingSpots.length > 0) {
+        initDistrictFilter();
+        renderDistrictChart();
+      }
+    });
+  </script>
+</body>
+</html>
